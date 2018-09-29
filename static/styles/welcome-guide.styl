@@ -1,0 +1,50 @@
+.welcome-guide
+    display none
+    padding 30px 20px 20px 20px
+
+    .title
+        display block
+        font-size 22px
+        width 100%
+        text-align center
+        margin-bottom 20px !important
+
+    .switch-btn
+        vertical-align middle
+
+    .hotkey
+        color active-blue-color
+
+    .toggle-streamlight-shortcut
+        margin-bottom 10px
+
+    .slider-btn
+        display block
+        width 241px
+        height 30px
+        line-height 30px
+        border-radius 5px
+        box-shadow 0 4px 8px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .19);
+        position relative
+        overflow hidden
+
+        label
+            width 100px
+            padding 0 10px
+            cursor pointer
+            text-align center
+            color #000
+            border-right 1px solid dark-theme-secondary-font-color
+            position absolute
+            transition ease-in-out .2s
+
+            &.active
+                background active-blue-color
+                color #fff
+
+            &:last-child
+                border none
+                left 121px
+
+        .light-theme-btn
+            color #fff

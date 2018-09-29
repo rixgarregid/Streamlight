@@ -1,0 +1,78 @@
+*
+    margin: 0
+    padding: 0
+
+html, body
+    display: block
+    width: 100%
+    height: 100%
+    user-select: none
+
+ul, ol
+    list-style-type: none
+
+.field
+    display: block
+    height: 35px
+    line-height 35px
+    margin-bottom: 10px
+
+.disabled
+    opacity .35
+    cursor default !important
+
+.not-implemented
+    display none
+
+input:focus
+    outline: none
+
+// input::-webkit-input-placeholder
+//     transition all 80ms
+
+label
+    display inline-block
+    transition .2s
+
+btn
+    display: block
+    cursor: pointer
+
+.btn-highlight
+    padding: 10px
+    font-family: 'Roboto'
+    font-size: 15px
+    text-align: center
+    color: #fff
+    background: primary-main-color
+    border-radius: 5px
+    cursor: pointer
+    transition: ease-in-out .2s
+
+    &:hover
+        background: secondary-main-color
+
+
+switch-btn
+    display: block
+    width: 20px
+    height: 10px
+    background: gray
+    border-radius: 30px
+    padding: 5px
+    transition: all .2s ease-in-out
+    cursor: pointer
+
+    .inner-circle
+        display: block
+        width: 10px
+        height: 10px
+        background: #fff
+        border-radius: 50%
+        transition: all .2s ease-in-out
+
+    &.active
+        background: primary-main-color
+
+        .inner-circle
+            margin-left: 10px
