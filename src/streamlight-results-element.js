@@ -1,22 +1,21 @@
-const ProgramsManager = require('./programs-manager')
+const AppsManager = require('./apps-manager')
 
 class StreamlightResultsElement extends HTMLElement {
   constructor () {
     super()
     this.renderHTML()
-    this.attachCommandElements()
 
-    this.programs = new ProgramsManager()
+    this.apps = new AppsManager()
 
-    this.programs.loadProgramsDB()
-    this.programsObject = this.programs.getProgramsDB()
+    this.apps.loadApps()
+    this.appsObject = this.apps.getApps()
 
     this.loadResultsFromFile()
   }
 
   loadResultsFromFile () {
-    for (let program in this.programsObject) {
-      this.renderHTMLResult(program, this.programsObject[program])
+    for (let app in this.appsObject) {
+      this.renderHTMLResult(app, this.appsObject[app])
     }
   }
 
@@ -27,23 +26,6 @@ class StreamlightResultsElement extends HTMLElement {
     resultElement.setAttribute('path', path)
 
     this.resultList.appendChild(resultElement)
-  }
-
-  attachCommandElements () {
-    this.reloadCommandElement = document.createElement('li')
-    this.reloadCommandElement.innerText = 'Streamlight: Reload'
-    this.reloadCommandElement.classList.add('result')
-    this.reloadCommandElement.classList.add('reload-command-result-item')
-    this.reloadCommandElement.classList.add('streamlight-command-result')
-
-    this.quitCommandElement = document.createElement('li')
-    this.quitCommandElement.innerText = 'Streamlight: Quit'
-    this.quitCommandElement.classList.add('result')
-    this.quitCommandElement.classList.add('quit-command-result')
-    this.quitCommandElement.classList.add('streamlight-command-result')
-
-    this.resultList.appendChild(this.reloadCommandElement)
-    this.resultList.appendChild(this.quitCommandElement)
   }
 
   renderHTML () {

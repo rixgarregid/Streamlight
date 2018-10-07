@@ -1,0 +1,26 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        //- meta(http-equiv='Content-Security-Policy' content='default-src * https://fonts.googleapis.com')
+        link(rel='stylesheet' href='./styles/streamlight.css')
+    body
+        streamlight-app(theme='dark' lang='en').streamlight-app
+            streamlight-search.streamlight-search
+            streamlight-results.streamlight-results
+                include command-result-panels
+                include commands-panel
+                include welcome-guide
+                include settings-panel
+                include add-panel
+
+        script.
+            require('../src/streamlight-app-element')
+            require('../src/streamlight-search-element')
+            require('../src/streamlight-results-element')
+            require('../src/welcome-guide-element')
+            require('../src/settings-panel-element')
+            require('../src/switch-button-element')
+            require('../src/command-palette')
+            require('../src/add-program-element')
+            require('../src/apps-manager')

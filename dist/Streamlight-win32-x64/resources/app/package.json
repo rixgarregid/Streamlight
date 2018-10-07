@@ -1,0 +1,39 @@
+{
+  "name": "streamlight",
+  "productName": "Streamlight",
+  "version": "0.1.0",
+  "description": "A custom app launcher powered by Electron.",
+  "main": "./src/main-process/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --development --foreground",
+    "debug": "electron . --development --foreground --window-limits",
+    "clean": "rimraf ./dist && rimraf config.json && rimraf apps.json && rimraf commands.json",
+    "dist": "npm run clean && cd script && build",
+    "live-reload": "live-reload . --port=9090 --delay=1000",
+    "build": "gulp build:pug && gulp build:stylus",
+    "build:watch": "npm run build && gulp watch"
+  },
+  "author": "Rix Garregid <rix.garregid@outlook.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "copyfiles": "^2.1.0",
+    "devtron": "^1.4.0",
+    "electron": "^1.8.4",
+    "electron-reload": "^1.2.5",
+    "gulp": "^3.9.1",
+    "gulp-plumber": "^1.2.0",
+    "gulp-pug": "^4.0.1",
+    "gulp-stylus": "^2.7.0",
+    "rimraf": "^2.6.2"
+  },
+  "dependencies": {
+    "auto-launch": "^5.0.5",
+    "dedent": "^0.7.0",
+    "electron-window-state-manager": "^0.3.2",
+    "events": "^3.0.0",
+    "is-electron-renderer": "^2.0.1",
+    "mathjs": "^5.2.0",
+    "yargs": "^12.0.1"
+  }
+}

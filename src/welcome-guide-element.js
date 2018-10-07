@@ -9,34 +9,34 @@ const Config = require('./config')
 const config = new Config(path.resolve('./config.json'))
 
 lightThemeBtn.addEventListener('click', () => {
-    if (darkThemeBtn.classList.contains('active')) {
-        darkThemeBtn.classList.remove('active')
-        darkThemeBtn.style.color = '#000'
-        lightThemeBtn.classList.add('active')
-        streamlightApp.setAttribute('theme', 'light')
-        config.set('theme', 'light')
-    }
+  if (darkThemeBtn.classList.contains('active')) {
+      darkThemeBtn.classList.remove('active')
+      darkThemeBtn.style.color = '#000'
+      lightThemeBtn.classList.add('active')
+      streamlightApp.setAttribute('theme', 'light')
+      config.set('theme', 'light')
+  }
 })
 
 darkThemeBtn.addEventListener('click', () => {
-    if (lightThemeBtn.classList.contains('active')) {
-        lightThemeBtn.classList.remove('active')
-        darkThemeBtn.classList.add('active')
-        darkThemeBtn.style.color = '#fff'
-        streamlightApp.setAttribute('theme', 'dark')
-        config.set('theme', 'dark')
-    }
+  if (lightThemeBtn.classList.contains('active')) {
+      lightThemeBtn.classList.remove('active')
+      darkThemeBtn.classList.add('active')
+      darkThemeBtn.style.color = '#fff'
+      streamlightApp.setAttribute('theme', 'dark')
+      config.set('theme', 'dark')
+  }
 })
 
 const runOnStartupToggle = document.querySelector('.autorun-toggle')
 runOnStartupToggle.addEventListener('click', () => {
-    if (runOnStartupToggle.classList.contains('active')) {
-        config.set('runOnSystemStartup', true)
-        ipcRenderer.send('enable-auto-launch')
-    } else {
-        config.set('runOnSystemStartup', false)
-        ipcRenderer.send('disable-auto-launch')
-    }
+  if (runOnStartupToggle.classList.contains('active')) {
+    config.set('runOnSystemStartup', false)
+    ipcRenderer.send('application:disable-auto-launch')
+  } else {
+    config.set('runOnSystemStartup', true)
+    ipcRenderer.send('application:enable-auto-launch')
+  }
 })
 
 const loadSettings = () => {

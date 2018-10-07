@@ -8,9 +8,11 @@
     "start": "electron .",
     "dev": "electron . --development --foreground",
     "debug": "electron . --development --foreground --window-limits",
-    "clean": "rimraf ./dist",
-    "dist": "clean && cd script && dist.cmd",
-    "live-reload": "live-reload . --port=9090 --delay=1000"
+    "clean": "rimraf ./dist && rimraf config.json && rimraf apps.json && rimraf commands.json",
+    "dist": "npm run clean && cd script && build",
+    "live-reload": "live-reload . --port=9090 --delay=1000",
+    "build": "gulp build:pug && gulp build:stylus",
+    "build:watch": "npm run build && gulp watch"
   },
   "author": "Rix Garregid <rix.garregid@outlook.com>",
   "license": "MIT",
@@ -31,6 +33,7 @@
     "electron-window-state-manager": "^0.3.2",
     "events": "^3.0.0",
     "is-electron-renderer": "^2.0.1",
+    "mathjs": "^5.2.0",
     "yargs": "^12.0.1"
   }
 }

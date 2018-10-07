@@ -1,4 +1,4 @@
-const defaultSchema = require('./default-config-schema')
+const defaultConfig = require('./config-default')
 const fs = require('fs')
 
 module.exports =
@@ -24,7 +24,7 @@ class Config {
 
   createConfigFile (path) {
     fs.closeSync(fs.openSync(path, 'w'))
-    fs.writeFileSync(path, JSON.stringify(defaultSchema, null, 2))
+    fs.writeFileSync(path, JSON.stringify(defaultConfig, null, 2))
     this.currentConfig = JSON.parse(fs.readFileSync(path))
   }
 }

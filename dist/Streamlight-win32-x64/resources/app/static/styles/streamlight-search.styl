@@ -1,0 +1,146 @@
+.streamlight-app
+    display block
+    width 680px
+    min-height 45px
+    max-height 430px
+    position relative
+    top 30px
+    left 50%
+    transform translateX(-50%)
+    font-family 'Roboto'
+    font-size 14px
+    border-radius 5px
+    box-shadow 0 0 25px 0 rgba(0, 0, 0, .5)
+    overflow hidden
+    transition .3s
+
+    .streamlight-search
+        display flex
+        width 100%
+        height 45px
+        align-items stretch
+
+        .icon-search
+            width 45px
+            height 45px
+            line-height 45px
+            font-size 26px
+            text-align center
+            -webkit-app-region drag
+
+        .input-box
+            width 620px
+            height 35px
+            position absolute
+            top 0
+            left 45px
+            line-height 35px
+            font-size 18px
+            overflow hidden
+            background transparent
+            border none
+            padding 5px 0
+            transition .2s
+            font-family 'Arial' !important
+
+        .input-placeholder
+            width 620px
+            height 35px
+            padding 5px 0
+            position absolute
+            top 0
+            left 50px
+            line-height 35px
+            font-size 18px
+            transition .2s
+            z-index -2
+
+    .streamlight-results
+        display block
+        transition .2s
+        width 100%
+        min-height 0
+        position relative
+
+        .result-list
+            display block
+            width 100%
+            position absolute
+            top 10px
+            overflow-y scroll
+
+            .result
+                display none
+                width 640px
+                height 10px
+                font-size 13px
+                line-height 10px
+                padding 10px 20px
+                transition .2s
+                cursor pointer
+                font-family 'Roboto'
+
+                &.displayed
+                    display block
+
+                &.selected
+                    color active-blue-color
+
+                &:hover
+                    color active-blue-color
+
+                &:last-child
+                    padding 10px 20px 20px 20px
+
+.streamlight-app[theme='light']
+    background light-theme-primary-color
+    color light-theme-primary-font-color
+
+    .input-box
+        color light-theme-primary-font-color
+
+        &::selection
+            background light-theme-primary-color
+            color light-theme-secondary-font-color
+    label
+        color light-theme-primary-font-color
+
+    .cursor
+        background light-theme-primary-font-color
+
+    .input-placeholder
+        color light-theme-secondary-font-color
+
+    .streamlight-results.active
+        border-top solid 1px light-theme-secondary-font-color
+
+    .result
+        color light-theme-primary-font-color
+
+.streamlight-app[theme='dark']
+    background dark-theme-primary-color
+    color dark-theme-primary-font-color
+
+    .input-box
+        color dark-theme-primary-font-color
+
+        &::selection
+            background dark-theme-primary-color
+            color dark-theme-secondary-font-color
+    label
+        color dark-theme-primary-font-color
+
+    .cursor
+        background dark-theme-primary-font-color
+
+    .input-placeholder
+        color dark-theme-secondary-font-color
+
+    .streamlight-results.active
+        border-top solid 1px dark-theme-secondary-font-color
+
+    .result
+        color dark-theme-primary-font-color
+
+::-webkit-scrollbar
+    display none

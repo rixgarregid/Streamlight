@@ -1,10 +1,10 @@
-const ProgramsManager = require('./programs-manager')
+const AppsManager = require('./apps-manager')
 
 class AddProgramElement extends HTMLElement {
   constructor () {
     super()
 
-    this.programs = new ProgramsManager()
+    this.apps = new AppsManager()
     this.importDOMElements()
     this.attachDOMEvents()
   }
@@ -17,6 +17,7 @@ class AddProgramElement extends HTMLElement {
       event.preventDefault()
 
       this.modalPanel.classList.add('active')
+      this.modalPanelInput.focus()
 
       for (let file of event.dataTransfer.files) {
         this.currentFileName = file.name.split('.')
@@ -27,10 +28,10 @@ class AddProgramElement extends HTMLElement {
     }
 
     this.modalPanelSubmitBtn.addEventListener('click', () => {
+      this.apps.add(this.modalPanelInput.value || this.currentFileName, this.currentFilePath)
+      this.apps.loadApps()
       this.modalPanel.classList.remove('active')
       this.modalPanelInput.value = ''
-      this.programs.add(this.modalPanelInput.value || this.currentFileName, this.currentFilePath)
-      this.programs.loadProgramsDB()
     })
 
     this.modalPanelCloseBtn.addEventListener('click', () => {
@@ -41,7 +42,7 @@ class AddProgramElement extends HTMLElement {
   importDOMElements () {
     this.dragDropPanel = document.querySelector('drag-drop-panel')
     this.modalPanel = document.querySelector('.modal-new-program-name')
-    this.modalPanelInput = document.querySelector('.modal-new-program-name input')
+    this.modalPanelInput = document.querySelector('.modal-new-program-name .modal-input')
     this.modalPanelSubmitBtn = document.querySelector('.submit-name-btn')
     this.modalPanelCloseBtn = document.querySelector('.close-modal-btn')
   }

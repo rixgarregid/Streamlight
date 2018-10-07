@@ -17,7 +17,7 @@ class StreamlightWindow {
       height: 490,
       maximizable: false,
       resizable: false,
-      skipTaskbar: false,
+      skipTaskbar: true,
       disableAutoHideCursor: true,
       alwaysOnTop: true,
       transparent: true,
@@ -36,7 +36,7 @@ class StreamlightWindow {
 
     this.browserWindow.loadURL(url.format({
       protocol: 'file',
-      pathname: path.join(__dirname, '..', '..', 'static/index.html'),
+      pathname: path.join(__dirname, '..', '..', 'static', 'index.html'),
       slashes: true
     }))
   }

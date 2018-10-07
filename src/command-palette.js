@@ -1,6 +1,8 @@
-const defaultCommands = require('./default-command-palette')
+const defaultCommands = require('./commands-default')
 const path = require('path')
 const fs = require('fs')
+const { app } = require('electron').remote
+const { ipcRenderer } = require('electron')
 
 module.exports =
 class CommandPalette {
@@ -18,9 +20,19 @@ class CommandPalette {
     }
   }
 
+  isCommand (inputValue) {
+    for (let command in this.commands) {
+      if (inputValue === command) {
+        return true
+      }
+    }
+  }
+
   lookForCommands (inputValue) {
     for (let command in this.commands) {
-      if (inputValue === `.${command}`) {
+      if (inputValue === command) {
+        console.log(`Detected command: ${command}`)
+
         document.querySelector(`.${command}-command-result`).style.display = 'block'
         document.querySelector('.streamlight-results').classList.add('active')
         document.querySelector('.streamlight-results').style.height = `${this.commands[`${command}`].resultHeight}px`
@@ -32,19 +44,19 @@ class CommandPalette {
     }
   }
 
-  isCommand (inputValue) {
-    for (let command in this.commands) {
-      if (inputValue === `.${command}`) {
-        return true
-      }
-    }
-  }
-
   hideAllCommandElements () {
     if (document.querySelectorAll('.command-panel').length > 0) {
       for (let commandPanel of document.querySelectorAll('.command-panel')) {
         commandPanel.style.display = 'none'
       }
+    }
+  }
+
+  run (command) {
+    switch (command) {
+      case 'application:quit': app.quit(); break;
+      case 'application:reload': ipcRenderer.send('application:reload'); break;
+      case 'window:center': ipcRenderer.send('window:center'); break;
     }
   }
 

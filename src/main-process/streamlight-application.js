@@ -21,15 +21,14 @@ class StreamlightApplication extends EventEmitter {
     this.streamlightWindow = new StreamlightWindow(options)
     this.config = new Config(path.resolve('config.json'))
     this.autoLaunch = new AutoLaunch({ name: app.getName() })
-
-    if (process.platform === 'darwin') Menu.setApplicationMenu(Menu.buildFromTemplate(macOSMenuTemplate))
+    this.autoLaunch.enable()
 
     this.tray = new Tray(nativeImage.createFromPath(path.resolve('./resources/icons/icon.png')))
     this.tray.setToolTip('Streamlight')
     this.tray.setContextMenu(Menu.buildFromTemplate([
       {
         label: 'Streamlight Search',
-        icon: nativeImage.createFromPath(path.resolve('./resources/icons/tray-menu-item-icon.png')),
+        icon: nativeImage.createFromPath(path.resolve('./resources/icons/tray-icon.png')),
         accelerator: this.config.get('toggleStreamlightShortcut'),
         click: () => this.emit('window:toggle')
       },
@@ -61,10 +60,13 @@ class StreamlightApplication extends EventEmitter {
     globalShortcut.register('CmdOrCtrl+Shift+Space', () => this.emit('window:center'))
     globalShortcut.register('CmdOrCtrl+Shift+R', () => this.emit('application:reload'))
 
-    ipcMain.on('window:show', () => this.emit('window:show'))
-    ipcMain.on('window:hide', () => this.emit('window:hide'))
+    ipcMain.on('application:quit', () => this.emit('application:quit'))
+    ipcMain.on('application:reload', () => this.emit('application:reload'))
+    ipcMain.on('application:reset', () => this.emit('application:reset'))
     ipcMain.on('application:enable-auto-launch', () => this.emit('application:enable-auto-launch'))
     ipcMain.on('application:disable-auto-launch', () => this.emit('application:disable-auto-launch'))
+    ipcMain.on('window:show', () => this.emit('window:show'))
+    ipcMain.on('window:hide', () => this.emit('window:hide'))
   }
 
   static isSecondInstance () {

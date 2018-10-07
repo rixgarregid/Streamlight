@@ -4,6 +4,8 @@ const { app } = require('electron').remote
 const path = require('path')
 const os = require('os')
 
+let startTime = performance.now()
+
 class StreamlightAppElement extends HTMLElement {
   constructor () {
     super()
@@ -63,6 +65,7 @@ class StreamlightAppElement extends HTMLElement {
     console.log(`Streamlight version: v${app.getVersion()}`)
     console.log(`Node version: ${process.version}`)
     console.log(`Running on: ${this.getSystemInfo()}`)
+    console.log(`App ready time: ${performance.now() - startTime}ms`)
     console.log(`Exec path: ${process.execPath}`)
   }
 

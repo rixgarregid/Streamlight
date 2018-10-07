@@ -22,6 +22,10 @@ class StreamlightSearchElement extends HTMLElement {
     }
   }
 
+  clearSearchBox () {
+    this.inputBox.value = ''
+  }
+
   togglePlaceholderText () {
     if (this.inputBox.value) {
       this.inputPlaceholder.style.opacity = 0
@@ -31,11 +35,18 @@ class StreamlightSearchElement extends HTMLElement {
   }
 
   openSelectedResult () {
-    for (let result of this.displayedResults) {
-      if (result.classList.contains('selected')) {
-        shell.openItem(result.getAttribute('path'))
+    if (this.commandPalette.isCommand(this.inputBox.value.toLowerCase())) {
+      this.commandPalette.run(document.querySelector(`.${this.inputBox.value.toLowerCase()}-command-result`).getAttribute('command'))
+    } else {
+      for (let result of this.displayedResults) {
+        if (result.classList.contains('selected')) {
+          shell.openItem(result.getAttribute('path'))
+        }
       }
     }
+
+    ipcRenderer.send('window:hide')
+    this.clearSearchBox()
   }
 
   updateSelectedResult (keyCode) {
@@ -73,13 +84,23 @@ class StreamlightSearchElement extends HTMLElement {
     }
   }
 
+  updateSearchOnGoogleResult (inputValue) {
+    let googleResult = document.querySelector('.google-command-result-item')
+    googleResult.innerText = `Google "${inputValue}"`
+    googleResult.setAttribute('path', `https://www.google.com/search?q=${inputValue}`)
+  }
+
+  hideStreamlightWindow () {
+    ipcRenderer.send('window:hide')
+  }
+
   attachDOMEvents () {
     this.inputBox.addEventListener('keydown', event => {
       this.togglePlaceholderText()
 
       switch (event.keyCode) {
         case 13: this.openSelectedResult(); break;                             // Event: Enter key pressed.
-        case 27: ipcRenderer.send('window:hide'); break;                       // Event: Esc key pressed.
+        case 27: this.hideStreamlightWindow(); break;                          // Event: Esc key pressed.
         case 38: this.updateSelectedResult(38); event.preventDefault(); break; // Event: Up arrow key pressed.
         case 40: this.updateSelectedResult(40); event.preventDefault(); break; // Event: Down arrow key pressed.
       }
@@ -110,7 +131,7 @@ class StreamlightSearchElement extends HTMLElement {
         if (event.keyCode === 37 || event.keyCode === 38 || event.keyCode === 39 || event.keyCode === 40) {
           return
         } else {
-          for (let result of this.displayedResults){
+          for (let result of this.displayedResults) {
             if (result.classList.contains('selected')) result.classList.remove('selected')
           }
           this.displayedResults[0].classList.add('selected')
