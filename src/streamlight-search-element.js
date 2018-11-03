@@ -34,6 +34,14 @@ class StreamlightSearchElement extends HTMLElement {
     }
   }
 
+  updateResultIcon () {
+    for (let result of this.results) {
+      if (result.classList.contains('selected')) {
+        this.resultIconContainer.style.background = `url(${result.getAttribute('icon')}`
+      }
+    }
+  }
+
   openSelectedResult () {
     if (this.commandPalette.isCommand(this.inputBox.value.toLowerCase())) {
       this.commandPalette.run(document.querySelector(`.${this.inputBox.value.toLowerCase()}-command-result`).getAttribute('command'))
@@ -117,6 +125,7 @@ class StreamlightSearchElement extends HTMLElement {
 
       this.commandPalette.lookForCommands(lookingFor.toLowerCase())
       this.searchResultsInDOM(lookingFor)
+      this.updateResultIcon()
 
       if (lookingFor === '' || this.displayedResults.length < 1) {
         if (this.commandPalette.isCommand(lookingFor.toLowerCase())) return
@@ -147,14 +156,19 @@ class StreamlightSearchElement extends HTMLElement {
     this.inputBox = document.createElement('input')
     this.inputBox.setAttribute('type', 'text')
     this.inputBox.classList.add('input-box')
+    this.inputBox.classList.add('input-text')
 
     this.inputPlaceholder = document.createElement('span')
     this.inputPlaceholder.classList.add('input-placeholder')
     this.inputPlaceholder.innerText = 'Streamlight Search'
 
+    this.resultIconContainer = document.createElement('span')
+    this.resultIconContainer.classList.add('result-icon')
+
     this.appendChild(this.searchIcon)
     this.appendChild(this.inputBox)
     this.appendChild(this.inputPlaceholder)
+    this.appendChild(this.resultIconContainer)
   }
 }
 

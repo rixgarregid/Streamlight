@@ -1,31 +1,31 @@
 .settings-panel
     display none
-    padding 20px
+    padding 30px 25px 25px 25px
 
-    .field
-        margin-bottom 10px
-
-        .switch-btn
-            vertical-align middle
-
-        .slider-btn
-            margin 20px 0
-
-    .search-dir-btn
-        display inline-block
-        width 100px
-        height 15px
-        line-height 15px
-        text-align center
-        padding 5px 10px
-        margin 0 15px
-        background active-blue-color
-        color #fff
-        border-radius 5px
-
-    .selected-search-dir
-        display inline-block
-        color inactive-gray-color
+    // .field
+    //     margin-bottom 10px
+    //
+    //     .switch-btn
+    //         vertical-align middle
+    //
+    //     .slider-btn
+    //         margin 20px 0
+    //
+    // .search-dir-btn
+    //     display inline-block
+    //     width 100px
+    //     height 15px
+    //     line-height 15px
+    //     text-align center
+    //     padding 5px 10px
+    //     margin 0 15px
+    //     background active-blue-color
+    //     color #fff
+    //     border-radius 5px
+    //
+    // .selected-search-dir
+    //     display inline-block
+    //     color inactive-gray-color
 
     .slider-btn
         display block
@@ -36,6 +36,7 @@
         box-shadow 0 4px 8px 0 rgba(0, 0, 0, .1), 0 6px 20px 0 rgba(0, 0, 0, .1);
         position relative
         overflow hidden
+        margin 20px 0
 
         label
             width 100px
@@ -43,12 +44,12 @@
             cursor pointer
             text-align center
             color #000
-            border-right 1px solid dark-theme-secondary-font-color
+            border-right 1px solid text-color-dark-selected
             position absolute
             transition ease-in-out .2s
 
             &.active
-                background active-blue-color
+                background text-color-highlight
                 color #fff
 
             &:last-child
@@ -58,26 +59,26 @@
         .light-theme-btn
             color #fff
 
-    .field.toggle-streamlight-shortcut input
-        width 150px
-        height 15px
-        padding 5px 10px
-        margin-left 20px
-        border-radius 5px
-        border 1px solid inactive-gray-color
-        color inactive-gray-color
-        background transparent
-        transition ease-in-out .2s
-        cursor pointer
-        text-align center
-
-        &:hover
-            border 1px solid active-blue-color
-            color active-blue-color
-
-        &:focus
-            border 1px solid active-blue-color
-            color active-blue-color
+    // .field.toggle-streamlight-shortcut input
+    //     width 150px
+    //     height 15px
+    //     padding 5px 10px
+    //     margin-left 20px
+    //     border-radius 5px
+    //     border 1px solid inactive-gray-color
+    //     color inactive-gray-color
+    //     background transparent
+    //     transition ease-in-out .2s
+    //     cursor pointer
+    //     text-align center
+    //
+    //     &:hover
+    //         border 1px solid active-blue-color
+    //         color active-blue-color
+    //
+    //     &:focus
+    //         border 1px solid active-blue-color
+    //         color active-blue-color
 
     .field.lang-selection .slider-btn
         width 512px

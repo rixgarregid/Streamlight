@@ -1,4 +1,4 @@
-![Streamlight](./.github/img/Streamlight Logo.png)
+![Streamlight](./.github/images/streamlight.png)
 
 `Streamlight` is an open source custom app launcher built in [Electron](electronjs.org).
 
@@ -26,19 +26,26 @@ npm run dev
 
 In order to add any program you want Streamlight to search for it, type the `add` command *(see [commands]() section)* and drag and drop your program's executable file in the add panel.
 
+## Keyboard shortcuts
+
+- `Command or Control + Space` Toggles Streamlight.
+- `Command or Control + Shift + Space` Restores Streamlight's default position.
+- `Command or Control + Shift + R` Reloads Streamlight app.
+
 ## Commands
 
 Here you have a complete list of commands `Streamlight` has available.
 
-- `Command or Control + Space` Toggles Streamlight.
-- `add` Displays a drag and drop panel to add your apps to `Streamlight`.
-- `center` Sets `Streamlight`'s window to the center of the screen. You can also achieve this by pressing `Command or Control + Shift + Space` or from the tray menu.
+- `add` Displays a drag and drop panel to add your apps to Streamlight.
+- `center` Sets Streamlight's window to the center of the screen..
 - `commands` Shows all the available commands.
-- `quit` Quits `Streamlight`.
-- `settings` Shows `Streamlight` settings panel.
+- `quit` Quits Streamlight.
+- `settings` Shows Streamlight settings panel.
 - `welcome` Displays the welcome guide.
 
-## Development
+## Development commands
+
+The following chart shows all the available npm commands to be used in development.
 
 Command | Description
 --- | ---
@@ -49,3 +56,5 @@ Command | Description
 `npm run build:watch` | Watchs for changes in the `static` folder and runs `npm run build` when a file has been modified and saved.
 `npm run clean` | Deletes `config.json`, `apps.json`, `commands.json` files and the `dist` folder to restore app defaults.
 `npm run dist` | Builds the binaries of the app and creates the `dist` folder if it haven't been created yet. Binaries are generated for the host platform.
+
+As Streamlight is built in Electron, it's essential you have installed Node.js to work on this app.

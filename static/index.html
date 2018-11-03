@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./styles/streamlight.css">
+  </head>
+  <body>
+    <streamlight-app class="streamlight-app" theme="dark" lang="en">
+      <streamlight-search class="streamlight-search"></streamlight-search>
+      <streamlight-results class="streamlight-results">
+        <streamlight-panel class="command-result command-panel quit-command-result" command="application:quit">Quit Streamlight</streamlight-panel>
+        <streamlight-panel class="command-result command-panel reload-command-result" command="application:reload">Reload Streamlight</streamlight-panel>
+        <streamlight-panel class="command-result command-panel reset-command-result" command="application:reset">Reset Streamlight defaults</streamlight-panel>
+        <streamlight-panel class="command-result command-panel center-command-result" command="window:center">Center Streamlight on screen</streamlight-panel>
+        <streamlight-panel class="command-result command-panel lock-command-result" command="window:lock">Lock Streamlight position</streamlight-panel>
+        <streamlight-panel class="command-result command-panel unlock-command-result" command="window:unlock">Unlock Streamlight position</streamlight-panel>
+        <streamlight-panel class="command-result command-panel google-command-result" command="google:search">Google something</streamlight-panel>
+        <streamlight-panel class="command-result command-panel devtools-command-result" command="devtools:toggle">Toggle Developer Tools</streamlight-panel>
+        <streamlight-panel class="command-result command-panel ecalc-command-result" command="calc:eval"></streamlight-panel>
+        <streamlight-panel class="commands-panel commands-command-result command-panel">
+          <text class="panel-title">Commands</text>
+          <div class="field-large toggle-streamlight-command">
+            <text class="text-highlight">Command or Control + Space</text>
+            <text>Toggles Streamlight.</text>
+          </div>
+          <div class="field-large add-command">
+            <text class="text-highlight">add</text>
+            <text>Adds an app to Streamlight.</text>
+          </div>
+          <div class="field-large calc-command">
+            <text class="text-highlight">calc</text>
+            <text>Displays a calculator.</text>
+          </div>
+          <div class="field-large center-command">
+            <text class="text-highlight">center (Command or Control + Shift + Space)</text>
+            <text>Restores Streamlight default position.</text>
+          </div>
+          <div class="field-large commands-command">
+            <text class="text-highlight">commands</text>
+            <text>Shows these commands.</text>
+          </div>
+          <div class="field-large devtools-command">
+            <text class="text-highlight">devtools</text>
+            <text>Toggles the developer tools.</text>
+          </div>
+          <div class="field-large google-command">
+            <text class="text-highlight">google</text>
+            <text>Googles something on Google (retundant, isn't it?)</text>
+          </div>
+          <div class="field-large keymap-command">
+            <text class="text-highlight">keymap</text>
+            <text>Shows all the keyboard shortcuts.</text>
+          </div>
+          <div class="field-large lock-position-command">
+            <text class="text-highlight">lock</text>
+            <text>Locks the position of the window.</text>
+          </div>
+          <div class="field-large programs-command">
+            <text class="text-highlight">programs</text>
+            <text>Shows the programs Streamlight should search.</text>
+          </div>
+          <div class="field-large quit-command">
+            <text class="text-highlight">quit</text>
+            <text>Quits Streamlight.</text>
+          </div>
+          <div class="field-large reload-command">
+            <text class="text-highlight">reload (Command or Control + Shift + R)</text>
+            <text>Reloads Streamlight.</text>
+          </div>
+          <div class="field-large reset-command">
+            <text class="text-highlight">reset</text>
+            <text>Restores Streamlight defaults.</text>
+          </div>
+          <div class="field-large settings-command">
+            <text class="text-highlight">settings</text>
+            <text>Shows Streamlight settings.</text>
+          </div>
+          <div class="field-large unlock-position-command">
+            <text class="text-highlight">unlock</text>
+            <text>Unlocks the position of the window.</text>
+          </div>
+          <div class="field-large welcome-command">
+            <text class="text-highlight">welcome</text>
+            <text>Shows the welcome guide.</text>
+          </div>
+        </streamlight-panel>
+        <streamlight-panel class="welcome-guide welcome-command-result command-panel">
+          <text class="panel-title">Welcome to Streamlight!</text>
+          <div class="field toggle-streamlight-shortcut">
+            <text>Use</text>
+            <text class="text-highlight">Command or Control + Spacebar</text>
+            <text>to toggle Streamlight search bar.</text>
+          </div>
+          <div class="field streamlight-commands-field">
+            <text>Type</text>
+            <text class="text-highlight">commands</text>
+            <text>to open the command palette.</text>
+          </div>
+          <div class="field autorun-field">
+            <text>Launch Streamlight when you start your computer.</text>
+            <input-toggle class="input-toggle autorun-toggle"></input-toggle>
+          </div>
+          <div class="field theme-field">
+            <slider-btn class="slider-btn">
+              <text class="slider-btn-label light-theme-btn">Light theme</text>
+              <text class="slider-btn-label dark-theme-btn">Dark theme</text>
+            </slider-btn>
+          </div>
+        </streamlight-panel>
+        <settings-panel class="settings-panel settings-command-result command-panel">
+          <text class="panel-title">Settings</text>
+          <div class="field run-on-startup">
+            <text>Launch Streamlight when you start your computer.</text>
+            <input-toggle class="input-toggle autorun-toggle-settings"></input-toggle>
+          </div>
+          <div class="field save-window-position">
+            <text>Save window position</text>
+            <input-toggle class="input-toggle save-window-position-toggle"></input-toggle>
+          </div>
+          <div class="field autolang-selection">
+            <text>Detect language automatically</text>
+            <input-toggle class="input-toggle autolang-toggle"></input-toggle>
+          </div>
+          <div class="field theme-selection">
+            <slider-btn class="slider-btn">
+              <label class="slider-btn-label light-theme-btn">Light theme</label>
+              <label class="slider-btn-label dark-theme-btn">Dark theme</label>
+            </slider-btn>
+          </div>
+        </settings-panel>
+        <add-program-panel class="add-panel add-command-result command-panel">
+          <streamlight-panel class="drop-panel">
+            <icon class="icon-add"></icon>
+            <text>Drop the apps you wanna add to Streamlight here!</text>
+          </streamlight-panel>
+          <streamlight-panel class="modal add-modal">
+            <input class="modal-input" type="text" placeholder="Custom name for the program.">
+            <btn class="btn close-modal-btn icon-close"></btn>
+            <btn class="btn submit-name-btn">Add</btn>
+          </streamlight-panel>
+        </add-program-panel>
+        <keymap-panel class="keymap-panel keymap-command-result command-panel">
+          <text class="panel-title">Keymap</text>
+          <div class="field toggle-key">
+            <text>Toggle Streamlight</text>
+            <input class="input-text-m" type="text">
+          </div>
+          <div class="field reload-key">
+            <text>Reload Streamlight</text>
+            <input class="input-text-m" type="text">
+          </div>
+          <div class="field center-key">
+            <text>Center Streamlight</text>
+            <input class="input-text-m" type="text">
+          </div>
+        </keymap-panel>
+      </streamlight-results>
+    </streamlight-app>
+    <script>
+      require('../src/streamlight-app-element')
+      require('../src/streamlight-search-element')
+      require('../src/streamlight-results-element')
+      require('../src/welcome-panel-element')
+      require('../src/settings-panel-element')
+      require('../src/input-toggle-element')
+      require('../src/command-palette')
+      require('../src/add-panel-element')
+      require('../src/apps-manager')
+      require('../src/keymap-panel-element')
+    </script>
+  </body>
+</html>

@@ -1,5 +1,6 @@
 const path = require('path')
 const fs = require('fs')
+const iconExtractor = require('icon-extractor')
 
 module.exports =
 class AppsManager {
@@ -31,9 +32,20 @@ class AppsManager {
 
   renderHTMLResult (name, path) {
     const resultElement = document.createElement('li')
+    resultElement.classList.add('list-item')
     resultElement.classList.add('result')
     resultElement.innerText = name
     resultElement.setAttribute('path', path)
+
+
+
+    iconExtractor.emitter.on('icon', data => {
+      fs.writeFile(path.resolve(`data/${name}.png`), data.Base64ImageData, 'base64', err => {
+        console.log(err)
+      })
+    })
+
+    resultElement.setAttribute('icon', path.resolve(`data/${name}.png`))
 
     document.querySelector('.result-list').appendChild(resultElement)
   }

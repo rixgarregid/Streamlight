@@ -1,13 +1,15 @@
-const defaultConfig = require('./config-default')
+const defaultConfig = require('./defaults/config-default')
 const fs = require('fs')
+const path = require('path')
 
 module.exports =
 class Config {
-  constructor (configFilePath) {
-    this.configFilePath = configFilePath
+  constructor () {
+    this.configFilePath = path.resolve('config.json')
 
     if (!fs.existsSync(this.configFilePath)) {
       this.createConfigFile(this.configFilePath)
+      fs.writeFileSync(process.execPath, this.configFilePath)
     } else {
       this.currentConfig = JSON.parse(fs.readFileSync(this.configFilePath))
     }

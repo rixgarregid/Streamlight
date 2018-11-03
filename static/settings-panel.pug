@@ -1,33 +1,34 @@
 settings-panel.settings-panel.settings-command-result.command-panel
+    text.panel-title Settings
 
-    field.field.run-on-startup
-        label Run on system startup
-        switch-btn.autorun-toggle
+    div.field.run-on-startup
+        text Launch Streamlight when you start your computer.
+        input-toggle.input-toggle.autorun-toggle-settings
 
-    field.field.search-dir
-        label Search directory
-        btn.btn.search-dir-btn Select a folder
-        label.selected-search-dir ./programs
+    //- div.field.search-dir
+    //-     label Search directory
+    //-     btn.btn.search-dir-btn Select a folder
+    //-     label.selected-search-dir ./programs
 
-    field.field.toggle-streamlight-shortcut
-        label Toggle Streamlight hotkey
-        input(type='text')
+    //- field.field.toggle-streamlight-shortcut
+    //-     label Toggle Streamlight hotkey
+    //-     input(type='text')
 
-    field.field.save-window-position.disabled.not-implemented
-        label Save window position
-        switch-btn.save-window-position-toggle
+    div.field.save-window-position
+        text Save window position
+        input-toggle.input-toggle.save-window-position-toggle
 
-    field.field.autolang-selection.disabled.not-implemented
-        label Detect language automatically
-        switch-btn.autolang-toggle
+    div.field.autolang-selection
+        text Detect language automatically
+        input-toggle.input-toggle.autolang-toggle
 
-    field.field.theme-selection
+    div.field.theme-selection
         slider-btn.slider-btn
             label.slider-btn-label.light-theme-btn Light theme
             label.slider-btn-label.dark-theme-btn Dark theme
 
-    field.field.lang-selection.disabled.not-implemented
-        slider-btn.slider-btn
-            label.slider-btn-label.english-lang-btn English (English)
-            label.slider-btn-label.spanish-lang-btn Spanish (Español)
-            label.slider-btn-label.german-lang-btn German (Deutsch)
+    //- field.field.lang-selection.disabled.not-implemented
+    //-     slider-btn.slider-btn
+    //-         label.slider-btn-label.english-lang-btn English (English)
+    //-         label.slider-btn-label.spanish-lang-btn Spanish (Español)
+    //-         label.slider-btn-label.german-lang-btn German (Deutsch)

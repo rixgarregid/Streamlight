@@ -1,8 +1,8 @@
-const defaultCommands = require('./commands-default')
+const defaultCommands = require('./defaults/commands-default')
 const path = require('path')
 const fs = require('fs')
 const { app } = require('electron').remote
-const { ipcRenderer } = require('electron')
+const { ipcRenderer, remote } = require('electron')
 
 module.exports =
 class CommandPalette {
@@ -54,9 +54,14 @@ class CommandPalette {
 
   run (command) {
     switch (command) {
-      case 'application:quit': app.quit(); break;
-      case 'application:reload': ipcRenderer.send('application:reload'); break;
-      case 'window:center': ipcRenderer.send('window:center'); break;
+      case 'application:quit': app.quit(); break
+      case 'application:reload': app.relaunch(); app.quit(); break
+      case 'application:reset': console.log('TODO: application:reset command'); break
+      case 'window:center': remote.getCurrentWindow().center(); break
+      case 'window:lock': document.querySelector('.icon-search').style.appRegion = 'no-drag'; break
+      case 'window:unlock': document.querySelector('.icon-search').style.appRegion = 'drag'; break
+      case 'google:search': console.log('TODO: google:search command'); break
+      case 'devtools:toggle': remote.getCurrentWindow().webContents.toggleDevTools(); break
     }
   }
 

@@ -1,4 +1,7 @@
 const AppsManager = require('./apps-manager')
+const iconExtractor = require('icon-extractor')
+const fs = require('fs')
+const path = require('path')
 
 class StreamlightResultsElement extends HTMLElement {
   constructor () {
@@ -19,11 +22,23 @@ class StreamlightResultsElement extends HTMLElement {
     }
   }
 
-  renderHTMLResult (name, path) {
+  renderHTMLResult (name, exePath) {
     const resultElement = document.createElement('li')
+    resultElement.classList.add('list-item')
     resultElement.classList.add('result')
     resultElement.innerText = name
-    resultElement.setAttribute('path', path)
+    resultElement.setAttribute('path', exePath)
+
+    // Check if the path ends with .exe
+    if (exePath.endsWith('.exe')) {
+      iconExtractor.emitter.on('icon', data => {
+        fs.writeFile(path.resolve(`data/${name}.png`), data.Base64ImageData, 'base64', (err) => {
+          if (err) console.log(err)
+        })
+      })
+    }
+
+    resultElement.setAttribute('icon', path.resolve(`data/${name}.png`))
 
     this.resultList.appendChild(resultElement)
   }
@@ -31,6 +46,7 @@ class StreamlightResultsElement extends HTMLElement {
   renderHTML () {
     this.resultList = document.createElement('ul')
     this.resultList.classList.add('result-list')
+    this.resultList.classList.add('list')
 
     this.appendChild(this.resultList)
   }

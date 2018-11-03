@@ -1,0 +1,28 @@
+.streamlight-results
+    display block
+    width 100%
+    min-height 0
+    position relative
+    transition .2s
+
+    .result-list
+        width 100%
+        position absolute
+        top 10px
+
+        .result
+            display none
+            width 640px
+            height 10px
+            padding 10px 20px
+            line-height 10px
+            font-size font-size-small
+            font-family 'Roboto'
+            transition .2s
+            cursor pointer
+
+            &.displayed
+                display block
+
+            &:last-child
+                padding 10px 20px 20px 20px

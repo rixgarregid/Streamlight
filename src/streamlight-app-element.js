@@ -12,7 +12,7 @@ class StreamlightAppElement extends HTMLElement {
 
     this.logEnvironmentInfo()
 
-    this.config = new Config(path.resolve('config.json'))
+    this.config = new Config()
     this.theme = this.config.get('theme')
     this.lang = this.config.get('lang')
 
@@ -70,7 +70,7 @@ class StreamlightAppElement extends HTMLElement {
   }
 
   displayWelcomeGuide () {
-    document.querySelector('welcome-guide').style.display = 'block'
+    document.querySelector('.welcome-guide').style.display = 'block'
     document.querySelector('.streamlight-results').classList.add('active')
     document.querySelector('.streamlight-results').style.height = 300 + 'px'
   }

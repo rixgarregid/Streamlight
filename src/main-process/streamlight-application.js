@@ -1,5 +1,6 @@
 const StreamlightWindow = require('./streamlight-window')
 const Config = require('../config')
+const KeymapManager = require('../keymap-manager')
 const AutoLaunch = require('auto-launch')
 const { EventEmitter } = require('events')
 const { app, globalShortcut, Tray, ipcMain, Menu, nativeImage } = require('electron')
@@ -19,9 +20,13 @@ class StreamlightApplication extends EventEmitter {
     this.version = app.getVersion()
     this.developmentMode = options.developmentMode
     this.streamlightWindow = new StreamlightWindow(options)
-    this.config = new Config(path.resolve('config.json'))
-    this.autoLaunch = new AutoLaunch({ name: app.getName() })
-    this.autoLaunch.enable()
+    this.config = new Config()
+    this.keymap = new KeymapManager()
+
+    if (this.config.get('autorun') && !this.developmentMode) {
+      this.autoLaunch = new AutoLaunch({ name: 'Streamlight' })
+      this.autoLaunch.enable()
+    }
 
     this.tray = new Tray(nativeImage.createFromPath(path.resolve('./resources/icons/icon.png')))
     this.tray.setToolTip('Streamlight')
@@ -29,7 +34,7 @@ class StreamlightApplication extends EventEmitter {
       {
         label: 'Streamlight Search',
         icon: nativeImage.createFromPath(path.resolve('./resources/icons/tray-icon.png')),
-        accelerator: this.config.get('toggleStreamlightShortcut'),
+        accelerator: this.keymap.get('toggle'),
         click: () => this.emit('window:toggle')
       },
       {
@@ -37,12 +42,12 @@ class StreamlightApplication extends EventEmitter {
       },
       {
         label: 'Restore Streamlight position',
-        accelerator: 'CmdOrCtrl+Shift+Space',
+        accelerator: this.keymap.get('center'),
         click: () => this.emit('window:center')
       },
       {
         label: 'Reload Streamlight',
-        accelerator: 'CmdOrCtrl+Shift+R',
+        accelerator: this.keymap.get('reload'),
         click: () => this.emit('application:reload')
       },
       {
@@ -55,10 +60,10 @@ class StreamlightApplication extends EventEmitter {
   initialize () {
     this.attachEvents()
 
-    globalShortcut.register(this.config.get('toggleStreamlightShortcut'), () => this.emit('window:toggle'))
-    globalShortcut.register('CmdOrCtrl+Shift+I', () => this.emit('window:open-dev-tools'))
-    globalShortcut.register('CmdOrCtrl+Shift+Space', () => this.emit('window:center'))
-    globalShortcut.register('CmdOrCtrl+Shift+R', () => this.emit('application:reload'))
+    globalShortcut.register(this.keymap.get('toggle'), () => this.emit('window:toggle'))
+    globalShortcut.register(this.keymap.get('center'), () => this.emit('window:center'))
+    globalShortcut.register(this.keymap.get('reload'), () => this.emit('application:reload'))
+    globalShortcut.register('CmdOrCtrl+Shift+I', () => this.emit('window:toggle-dev-tools'))
 
     ipcMain.on('application:quit', () => this.emit('application:quit'))
     ipcMain.on('application:reload', () => this.emit('application:reload'))
@@ -67,16 +72,6 @@ class StreamlightApplication extends EventEmitter {
     ipcMain.on('application:disable-auto-launch', () => this.emit('application:disable-auto-launch'))
     ipcMain.on('window:show', () => this.emit('window:show'))
     ipcMain.on('window:hide', () => this.emit('window:hide'))
-  }
-
-  static isSecondInstance () {
-    const instance = app.makeSingleInstance((commandLine, workingDirectory) => {
-      if (this.streamlightWindow) {
-        if (this.streamlightWindow.isMinimized()) this.streamlightWindow.restore()
-        this.streamlightWindow.focus()
-      }
-    })
-    return instance
   }
 
   attachEvents () {
@@ -88,7 +83,17 @@ class StreamlightApplication extends EventEmitter {
     this.on('window:hide', () => this.streamlightWindow.hide())
     this.on('window:toggle', () => this.streamlightWindow.browserWindow.isVisible() ? this.streamlightWindow.hide() : this.streamlightWindow.show())
     this.on('window:center', () => this.streamlightWindow.browserWindow.center())
-    this.on('window:open-dev-tools', () => this.streamlightWindow.browserWindow.openDevTools())
+    this.on('window:toggle-dev-tools', () => this.streamlightWindow.browserWindow.webContents.toggleDevTools())
+  }
+
+  static isSecondInstance () {
+    const quit = app.makeSingleInstance(() => {
+      if (this.streamlightWindow) {
+        if (this.streamlightWindow.isMinimized()) this.streamlightWindow.restore()
+        this.streamlightWindow.focus()
+      }
+    })
+    return quit
   }
 
   getVersion () {

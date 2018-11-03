@@ -1,14 +1,15 @@
 {
   "name": "streamlight",
   "productName": "Streamlight",
-  "version": "0.1.0",
+  "version": "0.2.0-beta",
   "description": "A custom app launcher powered by Electron.",
   "main": "./src/main-process/main.js",
   "scripts": {
     "start": "electron .",
     "dev": "electron . --development --foreground",
     "debug": "electron . --development --foreground --window-limits",
-    "clean": "rimraf ./dist && rimraf config.json && rimraf apps.json && rimraf commands.json",
+    "clean": "rimraf apps.json && rimraf config.json && rimraf keymap.json && rimraf commands.json",
+    "clean-all": "rimraf ./dist && rimraf config.json && rimraf apps.json && rimraf commands.json",
     "dist": "npm run clean && cd script && build",
     "live-reload": "live-reload . --port=9090 --delay=1000",
     "build": "gulp build:pug && gulp build:stylus",
@@ -32,6 +33,7 @@
     "dedent": "^0.7.0",
     "electron-window-state-manager": "^0.3.2",
     "events": "^3.0.0",
+    "icon-extractor": "^1.0.3",
     "is-electron-renderer": "^2.0.1",
     "mathjs": "^5.2.0",
     "yargs": "^12.0.1"
